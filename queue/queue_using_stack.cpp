@@ -1,4 +1,8 @@
 #include <stack>
+#include <iostream>
+
+using namespace std;
+
 class MyQueue {
     stack<int> s1,s2;
 public:

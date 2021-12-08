@@ -56,6 +56,11 @@ class Queue
         else
             cout<<"Queue is not empty"<<endl;
     }
+
+    ~Queue()
+    {
+        delete[] ptr;
+    }
 };
 
 

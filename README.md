@@ -1,6 +1,6 @@
 # Data_Structures_And_Algorithms
 
-In this repository, the various data structures and algorithms problems will be uploaded along with my solution in C++ as well as in Python. The websites being used for these problems are as follows.
+In this repository, the various data structures and algorithms problems will be uploaded along with my solution in C++. The websites being used for these problems are as follows.
 
 1) HackerRank - www.hackerrank.com
 2) InterviewBit - www.interviewbit.com

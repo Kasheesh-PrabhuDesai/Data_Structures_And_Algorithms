@@ -8,9 +8,9 @@ level order traversal of the tree.
 
 Time Complexity: O(D) where D is the depth of the tree
 Space Complexity: O(N) where N are the total number of nodes in the binary tree
-  
-*/
 
+*/
+#include<iostream>
 #include <algorithm>
 #include<queue>
 #include <vector>
@@ -60,10 +60,43 @@ vector<int> reverseLevelOrder(TreeNode<int> *root){
 }
 
 
+TreeNode<int>* buildtree(){
+  int d;
+  cin>>d;
+  TreeNode<int>* root;
+  if(d==-1){
+    return NULL;
+  }
+  root = new TreeNode<int>(d);
+  root->left=buildtree();
+  root->right=buildtree();
+  return root;
+}
+
+void print(vector<int> reverseOrder){
+    for(auto i:reverseOrder)
+        cout<<i<<" ";
+    cout<<endl;
+}
+
 
 int main()
 {
-    TreeNode<int> T(-1);
+    /*
+                    1
+                   2 3
+                 4 -1 5 6
+             -1 7 -1 -1 -1 -1
+                  -1 -1
+    
+    -1 indicates a null value.
 
+    */
+
+   TreeNode<int>* T = buildtree();
+   
+   vector<int> result = reverseLevelOrder(T);
+
+   print(result);
 
 }

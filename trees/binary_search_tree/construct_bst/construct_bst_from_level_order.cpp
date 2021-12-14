@@ -4,11 +4,10 @@ You are given an array of integers representing level order traversal.
 Construct a binary search tree from the given array.
 
 Approach:
-Start with the first element of array. If tree has no root, than set the first element as root.
-Traverse the remaining elements in the array, while comparing the value of each element to the
-value of the root. If value is less insert in left, else insert in right;
+The idea is to make a class which contains a pointer to the node, minimum data and maximum data 
+of the ancestor.
 
-Time Complexity: O(N^2) where N is the length of the array
+Time Complexity: O(N) where N is the length of the array
 Space Comlexity: O(N) where N is the length of the array
 
 */
@@ -16,6 +15,7 @@ Space Comlexity: O(N) where N is the length of the array
 #include <iostream>
 #include<queue>
 #include <vector>
+#include<bits/stdc++.h>
 
 using namespace std;
 
@@ -43,25 +43,51 @@ class BinarySearchTree
     }
 };
 
-BinarySearchTree<int>* insertValue(BinarySearchTree<int>* root,int val)
+class ansd{
+public:
+    BinarySearchTree<int>* n;
+    int mx,mn;
+};
+
+BinarySearchTree<int>* constructBstFromLevelOrder(vector<int>& lo)
 {
-    if(root==NULL)
-    {
-        root = new BinarySearchTree<int>(val);
-        //return root;
-    }
+    BinarySearchTree<int>*r = new BinarySearchTree<int>(lo[0]);
+    int i = 1;
+    queue<ansd>q;
+//     for(auto i:lo)cout<<i<<" ";
+//     cout<<endl;
 
-    else if(val<root->val)
-    {
-        root->left = insertValue(root->left,val);
+    ansd node;
+    node.n = r;
+    node.mx = INT_MAX;
+    node.mn = INT_MIN;
+ 
+    q.push(node);
+    int s = lo.size();
+    
+    while(!q.empty() && i < s){
+        ansd c = q.front();
+        q.pop();
+        if(c.n != NULL){
+            if(lo[i] < c.n->val && lo[i] > c.mn ){
+                c.n->left = new BinarySearchTree<int>(lo[i++]);
+                ansd l ;
+                l.n = c.n->left;
+                l.mx = c.n->val;
+                l.mn = c.mn;
+				q.push(l);                
+            }
+            if(lo[i] > c.n ->val && lo[i] < c.mx ){
+                c.n->right = new BinarySearchTree<int>(lo[i++]);
+            	ansd r;
+                r.n = c.n->right;
+                r.mn = c.n->val;
+                r.mx = c.mx;
+                q.push(r);
+            }  
+        }
     }
-
-    else
-    {
-        root->right = insertValue(root->right,val);
-    }
-
-    return root;
+    return r;    
 }
 
 void printLevelOrder(BinarySearchTree<int>* root)
@@ -103,10 +129,7 @@ int main()
 
     BinarySearchTree<int>* root = NULL;
 
-    for(int i=0;i<a.size();i++)
-    {
-        root = insertValue(root,a[i]);
-    }
+    root = constructBstFromLevelOrder(a);
 
     printLevelOrder(root);
 }

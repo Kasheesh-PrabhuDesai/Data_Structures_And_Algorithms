@@ -54,7 +54,45 @@ void inOrder(TreeNode<int>* root, vector<int>& nodes)
     inOrder(root->right,nodes);
     
 }
-
+vector<int> merge(vector<int>& arr1, vector<int>& arr2, int m, int n)
+{
+    // mergedArr[] is going to contain result
+ 	vector<int> mergedArr(m+n,0);
+    int i = 0, j = 0, k = 0;
+ 
+    // Traverse through both arrays
+    while (i < m && j < n)
+    {
+        // Pick the smaller element and put it in mergedArr
+        if (arr1[i] < arr2[j])
+        {
+            mergedArr[k] = arr1[i];
+            i++;
+        }
+        else
+        {
+            mergedArr[k] = arr2[j];
+            j++;
+        }
+        k++;
+    }
+ 
+    // If there are more elements in first array
+    while (i < m)
+    {
+        mergedArr[k] = arr1[i];
+        i++; k++;
+    }
+ 
+    // If there are more elements in second array
+    while (j < n)
+    {
+        mergedArr[k] = arr2[j];
+        j++; k++;
+    }
+ 
+    return mergedArr;
+}
 TreeNode<int>* mergeTwoBST(vector<int>& nodes,int start,int end)
 {
     if(start>end)
@@ -69,20 +107,21 @@ TreeNode<int>* mergeTwoBST(vector<int>& nodes,int start,int end)
     return root;
 }
 
-TreeNode<int>* mergeBST(TreeNode<int> *root1, TreeNode<int> *root2){
+TreeNode<int> *mergeBST(TreeNode<int> *root1, TreeNode<int> *root2){
     // Write your code here.
-    vector<int> n1,n2;
+    vector<int> n1,n2,r;
     
     inOrder(root1,n1);
     inOrder(root2,n2);
     
-    n1.insert(n1.end(),n2.begin(),n2.end());
+	int m = n1.size();
+    int n = n2.size();
     
-    sort(n1.begin(),n1.end());
+    r = merge(n1,n2,m,n);
     
-    int n = n1.size();
+    int ma_s = r.size();
     
-    return mergeTwoBST(n1,0,n-1);
+    return mergeTwoBST(r,0,ma_s-1);
     
     
 }

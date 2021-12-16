@@ -11,12 +11,17 @@ A binary search tree (BST) is a binary tree data structure that has the followin
 A Balanced BST is defined as a BST, in which the height of two subtrees of every node differs 
 no more than 1.
 
+Approach:
 
+Idea is to first perform inorder traversal to obtain a sorted array. Then perform preorder
+traversal using sorted array. At each recursion, change the value of root to the value of mid
+of the sorted array. Use two indices start and end. For left subtree change end to mid-1 and 
+for right subtree change start to mid+1.
 
-
-
-
+Time Complexity  : O(N)
+Space Complexity : O(N)
 */
+
 #include <iostream>
 #include <queue>
 #include <vector>

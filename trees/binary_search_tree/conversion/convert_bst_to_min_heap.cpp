@@ -43,27 +43,26 @@ void inOrder(BinaryTreeNode* root, vector<int>& io)
     inOrder(root->right,io);
 }
 
-void convertToHeap(BinaryTreeNode* root,vector<int> io, int* idx)
+void convertToHeap(BinaryTreeNode* root,vector<int>& io, int& idx)
 {
     if(root==NULL)
         return;
-    root->data = io[++*idx];
+    root->data = io[idx];
+    idx++;
     convertToHeap(root->left,io,idx);
     convertToHeap(root->right,io,idx);
 
 }
 BinaryTreeNode* convertBST(BinaryTreeNode* root)
 {
-	if(root==NULL)
-        return root;
     
     vector<int> io;
         
     inOrder(root,io);
     
-    int index=-1;
+    int index=0;
     
-    convertToHeap(root,io,&index);
+    convertToHeap(root,io,index);
     
     return root;
 }

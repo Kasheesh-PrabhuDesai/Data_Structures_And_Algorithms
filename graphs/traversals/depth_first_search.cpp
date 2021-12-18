@@ -9,8 +9,8 @@ of 1 indicates that the edge has already been visited and need not be visited ag
 While the stack is not empty, traverse the vertexes one after the other. If the vertex visited
 has neighbouring vertexes, then add the neigbouring vertexes to the stack. 
 
-Time Complexity: O(N2)
-Space Complexity: O(N)
+Time Complexity: O(V+N) where V is the number of vertexes and E the number of edges
+Space Complexity: O(V) where N is the number of vertexes
 
 */
 

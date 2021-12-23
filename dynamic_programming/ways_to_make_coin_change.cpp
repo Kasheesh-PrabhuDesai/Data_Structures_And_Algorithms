@@ -29,10 +29,12 @@ Space Complexity: O(N) where N is the size of the auxilary array created
 
 using namespace std;
 
+//function to calculate the number of ways the target amount can be achieved
 int numberOfWaysToMakeChange(int n, vector<int> denoms) {
-  // Write your code here.
-	vector<int> ways(n+1,0);
-	ways[0]=1;
+	vector<int> ways(n+1,0); // aux vector array to store the number of ways a target amount can be achieved
+	ways[0]=1; // the target amount of 0 can be achieved in only 1 way
+
+    //iterate through the entire denoms array. if the value of denom is less than the value of j, change the number of ways of achieving the amount at index j
 	for(int i=0;i<denoms.size();i++)
 	{
 		for(int j=1;j<ways.size();j++)
